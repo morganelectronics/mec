@@ -4,7 +4,7 @@
 
 import run_zappi
 import mec.zp
-
+from datetime import datetime, time
 
 def main():
     """Main"""
@@ -16,9 +16,17 @@ def main():
 
     for zappi in server_conn.state.zappi_list():
         print('Zappi is currently in mode {}'.format(zappi.mode))
-        # print(server_conn.set_mode_ecop(zappi.sno))
-        print(server_conn.set_mode_stop(zappi.sno))
 
+        ecop = True
+
+        # Set ecop to False between 16:00 and 19:00
+        if time(16, 0) <= time() < time(19, 0):
+            ecop = False
+
+        if ecop:
+            print(server_conn.set_mode_ecop(zappi.sno))
+        else:
+            print(server_conn.set_mode_stop(zappi.sno))
 
 if __name__ == '__main__':
     main()

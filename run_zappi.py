@@ -7,7 +7,7 @@ import time
 import sys
 import logging
 import logging.handlers
-import resource
+#import resource
 import datetime
 from collections import OrderedDict
 import daemon
@@ -568,7 +568,7 @@ if __name__ == '__main__':
     if len(sys.argv) == 2 and sys.argv[1] == 'start':
         # On a raspberry pi it can take a while to enumerate and
         # close so many files.
-        resource.setrlimit(resource.RLIMIT_NOFILE, (1024, 1024))
+        #resource.setrlimit(resource.RLIMIT_NOFILE, (1024, 1024))
         with daemon.DaemonContext():
             main()
     else:
